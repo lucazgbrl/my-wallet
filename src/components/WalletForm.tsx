@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { Dispatch, FormState, RootState, CurrencyType } from '../types';
-import { addExpense, fetchCurrencies, editExpense } from '../store/actions';
 
 const INITIAL_FORM: FormState = {
   value: '',
@@ -43,7 +42,7 @@ function WalletForm({ editingExpense, setEditingExpense }: WalletFormProps) {
   }, [editingExpense]);
 
   useEffect(() => {
-    dispatch(fetchCurrencies());
+    dispatch({ type: 'FETCH_CURRENCIES' });
   }, [dispatch]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -59,11 +58,11 @@ function WalletForm({ editingExpense, setEditingExpense }: WalletFormProps) {
 
     if (editingExpense) {
       // Atualiza despesa existente
-      dispatch(editExpense(editingExpense.id, form, exchangeRates));
+      dispatch({ type: 'EDIT_EXPENSE', payload: { id: editingExpense.id, form, exchangeRates } });
       setEditingExpense(null); // Sai do modo de edição
     } else {
       // Adiciona uma nova despesa
-      dispatch(addExpense(form, Date.now(), exchangeRates));
+      dispatch({ type: 'ADD_EXPENSE', payload: { form, timestamp: Date.now(), exchangeRates } });
     }
 
     setForm(INITIAL_FORM);

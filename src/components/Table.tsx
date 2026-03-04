@@ -1,6 +1,5 @@
 /* eslint-disable max-len */
 import { useDispatch } from 'react-redux';
-import { deleteExpense } from '../store/actions';
 import TableRow from './TableRow';
 import { Expense } from '../types';
 
@@ -10,7 +9,7 @@ function Table({ expenses, setEditingExpense }: { expenses: Expense[], setEditin
 } | null>> }) {
   const dispatch = useDispatch();
 
-  const handleDelete = (id: number) => dispatch(deleteExpense(id));
+  const handleDelete = (id: number) => dispatch({ type: 'DELETE_EXPENSE', payload: id });
 
   const handleEdit = (id: number) => {
     const expenseExist = expenses.find((expense) => expense.id === id);

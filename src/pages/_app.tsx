@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import { store } from '@/store';
 import './Login/Login.scss';
 import './Wallet/Wallet.scss';
 import App from '.';
-import store from '../store';
 
 const AppWithSSR = () => {
   const [isClient, setIsClient] = useState(false);

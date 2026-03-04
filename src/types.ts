@@ -3,7 +3,9 @@ import { AnyAction } from 'redux';
 
 // Usuário
 export type User = {
+  name: string;
   email: string;
+  password: string;
 };
 
 // Código da moeda

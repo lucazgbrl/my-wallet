@@ -87,3 +87,9 @@ $input-focus-border-color: #2563eb; // Azul profundo, coerente com o hover de bo
     }
   }
 }
+
+.form-error {
+  color: #ff4d4f;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}

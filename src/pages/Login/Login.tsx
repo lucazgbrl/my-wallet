@@ -1,75 +1,66 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
-import { handleUser } from '../../store/actions';
-import { Dispatch } from '../../types';
+import { useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { RootState } from "@/store";
 
-function Login() {
-  const nav = useNavigate();
-  const dispatch: Dispatch = useDispatch();
+import { loginSchema } from "@/schemas";
+import { login } from "@/store/authSlice";
+import { useAppDispatch } from "@/store/hooks";
+import { useNavigate } from "react-router-dom";
 
-  const [btnState, setBtnState] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+type LoginFormData = z.infer<typeof loginSchema>;
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const emailReg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const { value, name } = e.target;
-    if (name === 'email') {
-      setEmail(value);
+export function Login() {
+  const navigate = useNavigate();  
+  const dispatch = useAppDispatch();
+  const { loading, error } = useSelector((state: RootState) => state.auth);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit = async (data: LoginFormData) => {
+    try {
+      await dispatch(login(data)).unwrap();
+      navigate('/wallet');
+    } catch (err) {
+      console.error(err);
+      console.log("Login failed:", error);
     }
-    if (name === 'senha') {
-      setPassword(value);
-    }
-
-    if (emailReg.test(email) && password.length > 4) {
-      setBtnState(false);
-    } else { setBtnState(true); }
-  };
-
-  const handleClick = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    dispatch(handleUser(email));
-    nav('/carteira');
   };
 
   return (
     <main className="login-main">
-      <h1>Login</h1>
-      <form id="login-form" onSubmit={ handleClick }>
-        <label htmlFor="email">
-          E-mail:
-          {' '}
+      <h1>My Wallet</h1>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <label>
+          E-mail
           <input
-            type="text"
-            name="email"
-            id="email"
-            data-testid="email-input"
-            value={ email }
-            onChange={ onChange }
+            type="email"
+            placeholder="Digite seu e-mail"
+            {...register("email")}
           />
+          {errors.email && <span>{errors.email.message}</span>}
         </label>
-        <label htmlFor="senha">
-          Senha:
-          {' '}
+        <label>
+          Senha
           <input
             type="password"
-            name="senha"
-            id="senha"
-            data-testid="password-input"
-            value={ password }
-            onChange={ onChange }
+            placeholder="Digite sua senha"
+            {...register("password")}
           />
+          {errors.password && <span>{errors.password.message}</span>}
         </label>
-        <button
-          type="submit"
-          disabled={ btnState }
-        >
-          Entrar
+        {error && <p className="form-error">{error}</p>}
+        <button type="submit" disabled={loading || errors.email !== undefined || errors.password !== undefined}>
+          {loading ? "Entrando..." : "Entrar"}
         </button>
       </form>
     </main>
   );
 }
-
-export default Login;

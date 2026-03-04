@@ -23,11 +23,11 @@ Uma aplicação de carteira simples construída com **React**, **Redux** e **Typ
 
 1. Clone este repositório:
    ```bash
-   git clone https://github.com/usuario/simple-wallet.git
+   git clone https://github.com/lucazgbrl/My-Wallet.git
 
 2. Navegue até o diretório do projeto:
    ```bash
-   cd simple-wallet
+   cd My-Wallet
 
 3. Instale as dependências:
    ```bash

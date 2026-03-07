@@ -1,40 +1,60 @@
-# Simple Wallet
+# My Wallet
 
-Uma aplicação de carteira simples construída com **React**, **Redux** e **TypeScript**. O objetivo do projeto é permitir que você registre e acompanhe suas despesas de forma simples e eficiente.
+Aplicação web para gerenciamento de despesas pessoais.
 
-![Imagem de exemplo da carteira](./public/carteira.png)
+Permite que usuários registrem e acompanhem gastos através de uma
+interface moderna conectada a uma API backend.
 
-## 🚀 Funcionalidades
+## Tecnologias
 
-- **Registro de Despesas**: Adicione despesas com valores, descrições e categorias.
-- **Visualização de Despesas**: Veja uma lista de todas as despesas cadastradas.
-- **Cálculo do Total**: A aplicação soma automaticamente as despesas e exibe o valor total.
-- **Responsive Design**: Funciona bem em dispositivos móveis e desktops.
+-   Next.js
+-   React
+-   Redux
+-   SASS
+-   TypeScript
+-   TailwindCSS
+-   Axios
 
-## 🛠 Tecnologias Usadas
+## Funcionalidades
 
-- **React**: Biblioteca para construção da interface.
-- **Redux**: Gerenciamento de estado para a aplicação.
-- **TypeScript**: Superset do JavaScript para garantir mais robustez no código.
-- **SASS**: Pré-processador CSS para um estilo mais organizado e fácil de manter.
-- **React Router**: Navegação entre as páginas da aplicação.
+-   Autenticação de usuários
+-   Dashboard de despesas
+-   Criação de transações
+-   Edição de despesas
+-   Remoção de despesas
+-   Interface responsiva
 
-## 📦 Instalação
+## Estrutura
 
-1. Clone este repositório:
-   ```bash
-   git clone https://github.com/lucazgbrl/My-Wallet.git
+src/ - components - pages - services - contexts - hooks - styles
 
-2. Navegue até o diretório do projeto:
-   ```bash
-   cd My-Wallet
+## Instalação
 
-3. Instale as dependências:
-   ```bash
-   npm install
+Clone o repositório
 
-4. Para rodar o projeto em modo de desenvolvimento:
-   ```bash
-   npm start
+git clone https://github.com/lucazgbrl/my-wallet.git
 
-Isso abrirá a aplicação no navegador, normalmente em http://localhost:3000.
+Entre na pasta
+
+cd my-wallet
+
+Instale as dependências
+
+npm install
+
+Execute
+
+npm run dev
+
+A aplicação ficará disponível em
+
+http://localhost:3000
+
+## Integração com API
+
+NEXT_PUBLIC_API_URL=http://localhost:3333
+
+## Autor
+
+Lucas Gabriel\
+https://github.com/lucazgbrl

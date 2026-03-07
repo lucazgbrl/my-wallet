@@ -7,7 +7,7 @@ import { RootState } from "@/store";
 import { loginSchema } from "@/schemas";
 import { login } from "@/store/authSlice";
 import { useAppDispatch } from "@/store/hooks";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
@@ -56,10 +56,15 @@ export function Login() {
           />
           {errors.password && <span>{errors.password.message}</span>}
         </label>
-        {error && <p className="form-error">{error}</p>}
         <button type="submit" disabled={loading || errors.email !== undefined || errors.password !== undefined}>
           {loading ? "Entrando..." : "Entrar"}
         </button>
+
+        <p>
+          Não tem conta? <Link to="/register">Criar conta</Link>
+        </p>
+
+        {error && <p className="form-error">{error}</p>}
       </form>
     </main>
   );

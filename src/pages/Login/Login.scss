@@ -26,6 +26,21 @@ $input-focus-border-color: #2563eb; // Azul profundo, coerente com o hover de bo
     margin-bottom: 30px;
   }
 
+  p {
+    margin-top: 15px;
+    color: $white-color;
+    font-size: 0.9rem;
+
+    a {
+      color: $highlight-color;
+      text-decoration: none;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
   form {
     background-color: $primary-color;
     border-radius: 8px;

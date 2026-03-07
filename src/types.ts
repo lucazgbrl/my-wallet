@@ -1,28 +1,19 @@
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import { RootState } from './store';
+import { z } from 'zod';
+import { expenseSchema, loginSchema, registerSchema } from './schemas';
 
 // Usuário
 export type User = {
+  id: number;
   name: string;
   email: string;
-  password: string;
-};
-
-// Código da moeda
-export type CurrencyCode = string;
-
-// Tipagem para taxas de câmbio
-export type CurrencyType = {
-  [key: CurrencyCode]: {
-    code: string; // Código da moeda, como "USD"
-    ask: number; // Valor numérico do câmbio
-    name: string; // Nome da moeda
-  };
 };
 
 // Estado do formulário de despesas
 export type FormState = {
-  value: string; // Valor como string para entrada do formulário
+  value: number; // Valor como string para entrada do formulário
   description: string; // Descrição da despesa
   currency: string; // Código da moeda (ex.: "USD")
   method: string; // Método de pagamento (ex.: "Dinheiro")
@@ -32,24 +23,21 @@ export type FormState = {
 // Despesa registrada
 export type Expense = {
   id: number; // ID único da despesa
+  userId: number; // ID do usuário que registrou a despesa
   value: string | number; // Valor em string (formulário) ou número (processamento)
-  description: string; // Descrição da despesa
+  exchangeRate: number; // Taxa de câmbio para conversão
+  valueBRL: number; // Valor convertido para BRL
+  description?: string; // Descrição da despesa
   currency: string; // Código da moeda
   method: string; // Método de pagamento
   tag: string; // Categoria da despesa
-  exchangeRates: CurrencyType; // Taxas de câmbio
-};
-
-// Estado global da aplicação
-export type RootState = {
-  user: User;
-  wallet: {
-    expenses: Expense[]; // Lista de despesas
-    currencies: string[]; // Lista de códigos de moedas
-    isFetching: boolean; // Indicador de carregamento
-    errorMessage?: string; // Mensagem de erro opcional
-  };
+  createdAt?: string; // Data de criação da despesa
+  user?: User; // Informações do usuário (opcional)
 };
 
 // Tipo para Dispatch com suporte ao Redux Thunk
 export type Dispatch = ThunkDispatch<RootState, null, AnyAction>;
+
+export type ExpenseFormData = z.infer<typeof expenseSchema>;
+export type LoginFormData = z.infer<typeof loginSchema>;
+export type RegisterFormData = z.infer<typeof registerSchema>;

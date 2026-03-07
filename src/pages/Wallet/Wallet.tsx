@@ -1,12 +1,14 @@
 /* eslint-disable max-len */
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
+
+import { RootState } from '../../store';
+
 import Header from '../../components/Header';
 import Table from '../../components/Table';
 import WalletForm from '../../components/WalletForm';
-import { RootState } from '../../types';
 
-function Wallet() {
+export function Wallet() {
   const { expenses } = useSelector((state: RootState) => state.wallet);
 
   const [editingExpense, setEditingExpense] = useState<{ id: number; form: any } | null>(null); // Gerencia o estado de edição
@@ -16,10 +18,7 @@ function Wallet() {
   return (
     <main className="wallet-main">
       <Header />
-      <WalletForm
-        editingExpense={ editingExpense }
-        setEditingExpense={ setEditingExpense } // Passa o setter para o WalletForm
-      />
+      <WalletForm/>
       {hasExpenses ? (
         <Table
           expenses={ expenses }
@@ -31,5 +30,3 @@ function Wallet() {
     </main>
   );
 }
-
-export default Wallet;

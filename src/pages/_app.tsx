@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { store } from '@/store';
 import './Login/Login.scss';
 import './Wallet/Wallet.scss';
+import './Register/Register.scss';
 import App from '.';
 
 const AppWithSSR = () => {

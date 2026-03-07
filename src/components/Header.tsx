@@ -1,22 +1,28 @@
 import { useSelector } from 'react-redux';
 import Image from 'next/image'
-import { RootState } from '../types';
 
-function calculateTotal(expenses: RootState['wallet']['expenses']): number {
-  return expenses.reduce(
-    // eslint-disable-next-line max-len
-    (acc, curr) => acc + Number(curr.value) * Number(curr.exchangeRates[curr.currency].ask),
-    0,
-  );
-}
+import { RootState } from '../store';
+import { selectTotalBRL } from '../utils/calcExpense';
+import { useAppDispatch} from "@/store/hooks";
+import { logout } from "@/store/authSlice";
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
-  const { user, wallet } = useSelector((state: RootState) => ({
-    user: state.user,
-    wallet: state.wallet,
-  }));
+  const user = useSelector((state: RootState) => state.auth.user);
+  const wallet = useSelector((state: RootState) => state.wallet);
 
-  const total = calculateTotal(wallet.expenses);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  console.log('User:', user);
+  console.log('Wallet:', wallet);
+
+  const total = useSelector(selectTotalBRL);
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
 
   return (
     <header className="App-header">
@@ -24,7 +30,7 @@ function Header() {
       <p className="email" data-testid="email-field">
         Email:
         {' '}
-        {user.email}
+        {user?.email}
       </p>
       <p className="total" data-testid="total-field">
         Total Gasto:
@@ -32,6 +38,9 @@ function Header() {
         {total.toFixed(2)}
       </p>
       <p className="currency" data-testid="header-currency-field">BRL</p>
+      <button type="button" onClick={handleLogout}>
+        Logout
+      </button>
     </header>
   );
 }

@@ -1,7 +1,10 @@
+@use "sass:color";
+
 $primary-color: #1f2937;           // Azul-cinza escuro para cabeçalhos e elementos principais
 $secondary-color: #f9fafb;         // Cinza quase branco para o fundo principal
 $highlight-color: #10b981;         // Verde esmeralda para elementos de destaque
 $white-color: #ffffff;             // Branco puro
+$grey-color: #6b7280;              // Cinza médio para texto secundário e ícones
 $table-border-color: #d1d5db;      // Cinza claro para bordas de tabelas
 $hover-color: #e5e7eb;             // Cinza suave para hover em elementos
 $text-color: #111827;              // Cinza muito escuro para texto principal
@@ -211,7 +214,7 @@ body {
       cursor: pointer;
   
       &:hover {
-        background-color: color.adjust($grey-color, $lightness: -25%, $space: hsl);
+        background-color: color.scale($grey-color, $lightness: -25%);
       }
   
       &:disabled {
@@ -287,7 +290,7 @@ body {
         }
 
         &:hover {
-          background-color: color.adjust($grey-color, $lightness: 40%, $space: hsl);
+          background-color: color.scale($grey-color, $lightness: -25%);
         }
 
         td {
@@ -317,7 +320,7 @@ body {
       &#delete-btn {
         background-color: $highlight-color;
         &:hover {
-          background-color: color.adjust($grey-color, $lightness: -25%, $space: hsl);
+          background-color: color.scale($grey-color, $lightness: -25%);
         }
       }
     }

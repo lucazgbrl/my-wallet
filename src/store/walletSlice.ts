@@ -28,9 +28,13 @@ export const fetchExpenses = createAsyncThunk(
 
 export const createExpense = createAsyncThunk(
   "wallet/createExpense",
-  async (data: ExpenseFormData) => {
-    const response = await api.post("/expenses", data);
-    return response.data;
+  async (expenseData: ExpenseFormData, { rejectWithValue }) => {
+    try {
+      const response = await api.post("/expenses/", expenseData);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.response?.data?.message || "Failed to create expense");
+    }
   }
 );
 

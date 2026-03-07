@@ -8,7 +8,7 @@ import Header from '../../components/Header';
 import Table from '../../components/Table';
 import WalletForm from '../../components/WalletForm';
 
-export function Wallet() {
+const Wallet = () => {
   const { expenses } = useSelector((state: RootState) => state.wallet);
 
   const [editingExpense, setEditingExpense] = useState<{ id: number; form: any } | null>(null); // Gerencia o estado de edição
@@ -30,3 +30,5 @@ export function Wallet() {
     </main>
   );
 }
+
+export default Wallet;

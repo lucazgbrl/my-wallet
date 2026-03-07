@@ -5,7 +5,7 @@ import { useAppDispatch } from "../store/hooks";
 import { createExpense } from "../store/walletSlice";
 import { ExpenseFormData } from "@/types";
 
-function WalletForm() {
+const WalletForm = () => {
   const dispatch = useAppDispatch();
 
   const {

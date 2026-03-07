@@ -11,7 +11,7 @@ import { useAppDispatch } from "@/store/hooks";
 
 type RegisterFormData = z.infer<typeof registerSchema>;
 
-export function Register() {
+const Register = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { loading, error } = useSelector((state: RootState) => state.auth);
@@ -65,3 +65,5 @@ export function Register() {
     </main>
   );
 }
+
+export default Register;

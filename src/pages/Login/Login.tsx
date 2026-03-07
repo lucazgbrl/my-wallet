@@ -11,7 +11,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 type LoginFormData = z.infer<typeof loginSchema>;
 
-export function Login() {
+const Login = () => {
   const navigate = useNavigate();  
   const dispatch = useAppDispatch();
   const { loading, error } = useSelector((state: RootState) => state.auth);
@@ -69,3 +69,5 @@ export function Login() {
     </main>
   );
 }
+
+export default Login;

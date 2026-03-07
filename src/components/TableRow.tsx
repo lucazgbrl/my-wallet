@@ -6,8 +6,8 @@ function TableRow({ expense, onDelete, onEdit }: { expense: Expense, onDelete: (
   type: string;
   payload: number | undefined;
 }, onEdit: (id: number) => void }) {
-  const exchange = expense.exchangeRates[expense.currency];
-  const convertedValue = (Number(exchange.ask) * Number(expense.value)).toFixed(2);
+  const exchange = expense.exchangeRate;
+  const convertedValue = expense.valueBRL.toFixed(2);
 
   useEffect(() => { }, [expense]);
 
@@ -17,8 +17,8 @@ function TableRow({ expense, onDelete, onEdit }: { expense: Expense, onDelete: (
       <td>{expense.tag}</td>
       <td>{expense.method}</td>
       <td>{Number(expense.value).toFixed(2)}</td>
-      <td>{exchange.name}</td>
-      <td>{Number(exchange.ask).toFixed(2)}</td>
+      <td>{exchange}</td>
+      <td>{exchange}</td>
       <td>{convertedValue}</td>
       <td>Real</td>
       <td>
